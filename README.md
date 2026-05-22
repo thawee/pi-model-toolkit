@@ -119,6 +119,12 @@ To atomically bump the version across all manifests, configuration files, and re
 
 ---
 
+## 🤝 Acknowledgments
+
+This project was inspired by [@vtstech/pi-ollama-sync](https://github.com/vtstech/pi-ollama-sync). Special thanks to the original author for the excellent implementation!
+
+---
+
 ## 📄 License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
