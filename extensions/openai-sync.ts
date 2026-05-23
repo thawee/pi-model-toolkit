@@ -16,9 +16,9 @@ import { section, ok, fail, warn, info } from "../shared/format";
 // ── Branding ──────────────────────────────────────────────────────────────
 
 const BRANDING = [
-  `  ⚡ Pi OpenAI Sync v${EXTENSION_VERSION}`,
-  `  Written by thawee`,
-  `  GitHub: https://github.com/thawee`,
+  `  ⚡ Pi Custom Models Suite v${EXTENSION_VERSION}`,
+  `  OpenAI Compatibility Sync`,
+  `  Written by thawee — https://github.com/thawee`,
 ].join("\n");
 
 // ── Helpers ────────────────────────────────────────────────────────────────
@@ -247,12 +247,12 @@ export default function (pi: ExtensionAPI) {
   // ── Slash command: /openai-sync ────────────────────────────────────────
 
   pi.registerCommand("openai-sync", {
-    description: "Sync models from an OpenAI-compatible API (e.g. Ollama, llama.cpp). Use: /openai-sync <url> [apiKey]",
-    detailedHelp: "\n\n🔄 OpenAI Compatibility Synchronization Extension\n\nSynchronizes available models from any OpenAI-compatible API\n(such as Ollama, llama.cpp, Together AI, DeepInfra, etc.)\ninto Pi's models.json configuration file.\n\n📋 Usage:\n  /openai-sync <url> [apiKey] - Sync with URL (provider derived automatically from host/port)\n  /openai-sync --help         - Show this help\n\n🔧 Features:\n• Reasoning model auto-detection\n• Model family auto-detection\n• Atomic configuration updates\n• Compatible with local instances (Ollama, llama.cpp)\n• Compatible with cloud providers (Together AI, DeepInfra)\n",
-    async handler(args, ctx) {
+    description: "Sync available models from an OpenAI-compatible API (e.g. Ollama, llama.cpp, Together AI) into your Pi configuration. Use: /openai-sync <url> [apiKey]",
+    detailedHelp: "\n\n🔄 OpenAI Compatibility Sync (Pi Custom Models Suite)\n\nSynchronizes available models from any OpenAI-compatible API\n(such as Ollama, llama.cpp, Together AI, DeepInfra, etc.)\ninto Pi's models.json configuration file.\n\n📋 Usage:\n  /openai-sync <url> [apiKey] - Sync with URL (provider derived automatically from host/port)\n  /openai-sync --help         - Show this help\n\n🔧 Features:\n• Reasoning model auto-detection\n• Model family auto-detection\n• Atomic configuration updates\n• Compatible with local instances (Ollama, llama.cpp)\n• Compatible with cloud providers (Together AI, DeepInfra)\n",
+    async handler(args: string, ctx: any) {
       if (args.trim() === "--help") {
         ctx.ui.notify(
-          "🔄 OpenAI Compatibility Synchronization Extension\n\n" +
+          "🔄 OpenAI Compatibility Sync (Pi Custom Models Suite)\n\n" +
           "📋 Usage:\n" +
           "  /openai-sync <url> [apiKey] - Sync with URL (provider derived automatically from host/port)\n" +
           "  /openai-sync --help         - Show this help\n\n" +
@@ -341,9 +341,9 @@ export default function (pi: ExtensionAPI) {
 
   pi.registerTool({
     name: "openai_sync",
-    label: "OpenAI Sync",
+    label: "OpenAI Compatibility Sync",
     description:
-      "Sync available models from an OpenAI-compatible instance into Pi's models.json config file.\n\n" +
+      "Synchronize available models from an OpenAI-compatible server into Pi's configuration.\n\n" +
       BRANDING,
     parameters: {
       type: "object",
@@ -363,7 +363,7 @@ export default function (pi: ExtensionAPI) {
       },
       required: ["url"],
     } as any,
-    async execute(_toolCallId, params, _signal, _onUpdate, _ctx) {
+    async execute(_toolCallId: string, params: any, _signal: AbortSignal, _onUpdate: any, _ctx: any) {
       const provider = (params as any)?.provider as string | undefined;
       const url = (params as any)?.url as string;
       const apiKey = (params as any)?.apiKey as string | undefined;

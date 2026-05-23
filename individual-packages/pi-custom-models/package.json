@@ -1,0 +1,23 @@
+{
+  "name": "@thawee/pi-custom-models",
+  "version": "1.1.0",
+  "description": "Pi Custom Models Suite: Sync models from OpenAI-compatible APIs or manage models on llama.cpp router mode",
+  "main": "openai-sync.js",
+  "keywords": ["pi-package", "pi", "pi-coding-agent", "pi-extensions"],
+  "license": "MIT",
+  "access": "public",
+  "type": "module",
+  "author": "thawee",
+  "homepage": "https://github.com/thawee/pi-custom-models",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thawee/pi-custom-models"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": ">=0.66"
+  },
+  "pi": {
+    "extensions": ["./openai-sync.js", "./llama-model.js"]
+  }
+}
+

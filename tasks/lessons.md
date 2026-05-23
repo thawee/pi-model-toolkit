@@ -10,4 +10,8 @@
 
 ## 3. macOS `sed -i` Requires Empty String Argument
 - **Pattern:** `sed -i 's/.../.../'' file` fails on macOS BSD sed with an error like `undefined label`. GNU sed (Linux) allows `sed -i 's/.../.../' file` without the empty string.
-- **Correction:** Always use `sed -i '' 's/.../.../'' file` (with the empty `''` backup extension argument) in all shell scripts designed to run on macOS.
+- **Correction:** Always use `sed -i '' 's/.../.../' file` (with the empty `''` backup extension argument) in all shell scripts designed to run on macOS.
+
+## 4. Professional Rebranding and Tool Naming Consistency
+- **Pattern:** When renaming or rebranding packages/modules, ensure complete removal of old naming references (e.g., `openai_sync`) to prevent legacy baggage, and avoid arbitrary numeric sequencing prefixes like 'Tool X of Y:' which can clutter the UI.
+- **Correction:** Keep descriptions, branding headers, and help logs highly professional, concise, and focused on functional descriptions. Rename registered tool names to match rebranded command names (e.g., `openai_server` tool matching `openai-server` command) to maintain structural consistency.

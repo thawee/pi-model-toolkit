@@ -3,7 +3,7 @@
  * Eliminates getOllamaBaseUrl() duplication across model-test, ollama-sync, status.
  *
  * @module shared/ollama
- * @writtenby thawee — https://github.com/thawee/pi-openai-sync
+ * @writtenby thawee — https://github.com/thawee/pi-custom-models
  */
 import * as fs from "node:fs";
 import * as path from "node:path";
@@ -26,7 +26,7 @@ import type { PiExtensionContext } from "./types";
  *   - scripts/publish-packages.sh (derived from VERSION at runtime)
  *   - package.json (version field)
  */
-export const EXTENSION_VERSION = "1.0.0";
+export const EXTENSION_VERSION = "1.1.0";
 
 /**
  * Path to Pi's models.json configuration file.
@@ -499,16 +499,19 @@ export async function fetchModelContextLength(
         model_info?: Record<string, unknown>;
         template?: string;
       };
-      // Ollama uses architecture-specific keys like "qwen3.context_length"
-      for (const key of Object.keys(data?.model_info ?? {})) {
-        if (key.endsWith(".context_length")) {
-          const val = data.model_info[key];
-          if (typeof val === "number") return val;
+      const modelInfo = data?.model_info;
+      if (modelInfo) {
+        // Ollama uses architecture-specific keys like "qwen3.context_length"
+        for (const key of Object.keys(modelInfo)) {
+          if (key.endsWith(".context_length")) {
+            const val = modelInfo[key];
+            if (typeof val === "number") return val;
+          }
         }
+        // Fallback: generic "num_ctx" key
+        const numCtx = modelInfo["num_ctx"];
+        if (typeof numCtx === "number") return numCtx;
       }
-      // Fallback: generic "num_ctx" key
-      const numCtx = data?.model_info?.["num_ctx"];
-      if (typeof numCtx === "number") return numCtx;
     } catch (err) {
       debugLog("ollama", `failed to fetch context length for ${modelName}`, err);
       return undefined;

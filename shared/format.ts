@@ -3,7 +3,7 @@
  * Extracted from diag.ts and model-test.ts to eliminate duplication.
  *
  * @module shared/format
- * @writtenby thawee — https://github.com/thawee/pi-openai-sync
+ * @writtenby thawee — https://github.com/thawee/pi-custom-models
  */
 
 // ============================================================================

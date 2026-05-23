@@ -111,7 +111,7 @@ describe("openai-sync Extension Registration", () => {
 
     // Test case 2: --help
     await commandHandler("--help", mockCtx);
-    assert.match(notifiedMsg, /OpenAI Compatibility Synchronization Extension/);
+    assert.match(notifiedMsg, /OpenAI Compatibility Sync/);
     assert.equal(notifiedType, "info");
   });
 });

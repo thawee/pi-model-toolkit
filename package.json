@@ -1,21 +1,22 @@
 {
-  "name": "@thawee/pi-openai-sync",
-  "version": "1.0.0",
-  "description": "OpenAI-compatible model registration and sync extension for Pi Coding Agent workspace",
+  "name": "@thawee/pi-custom-models",
+  "version": "1.1.0",
+  "description": "Pi Custom Models Suite: Sync models from OpenAI-compatible APIs or manage models on llama.cpp router mode",
   "keywords": [
     "pi-package",
     "pi",
     "pi-coding-agent",
     "pi-extensions",
     "openai",
-    "sync"
+    "custom-models",
+    "llama"
   ],
   "license": "MIT",
   "author": "thawee",
-  "homepage": "https://github.com/thawee/pi-openai-sync",
+  "homepage": "https://github.com/thawee/pi-custom-models",
   "repository": {
     "type": "git",
-    "url": "https://github.com/thawee/pi-openai-sync"
+    "url": "https://github.com/thawee/pi-custom-models"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

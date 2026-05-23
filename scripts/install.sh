@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-# install.sh — Install the pi-openai-sync extension locally.
+# install.sh — Install the pi-custom-models extension locally.
 #
-# Copies the compiled extension from individual-packages/pi-openai-sync
-# into ~/.pi/agent/extensions/pi-openai-sync.
+# Copies the compiled extension from individual-packages/pi-custom-models
+# into ~/.pi/agent/extensions/pi-custom-models.
 #
 # Usage:
 #   ./scripts/install.sh
@@ -13,7 +13,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-PACKAGE_NAME="pi-openai-sync"
+PACKAGE_NAME="pi-custom-models"
 PKG_SRC="$REPO_ROOT/individual-packages/$PACKAGE_NAME"
 INSTALL_DIR="$HOME/.pi/agent/extensions"
 INSTALL_TARGET="$INSTALL_DIR/$PACKAGE_NAME"
@@ -68,5 +68,6 @@ echo ""
 log "Restart Pi to load the extension."
 echo ""
 info "To verify:    /openai-sync --help"
+info "To verify:    /llama-model"
 info "To uninstall: rm -rf $INSTALL_TARGET"
 echo ""

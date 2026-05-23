@@ -12,7 +12,7 @@ function debugLog(module, message, ...args) {
 }
 
 // shared/ollama.ts
-var EXTENSION_VERSION = "1.0.0";
+var EXTENSION_VERSION = "1.1.0";
 var MODELS_JSON_PATH = path.join(os.homedir(), ".pi", "agent", "models.json");
 var _modelsJsonCache = null;
 var _ollamaBaseUrlCache = null;
@@ -194,9 +194,9 @@ function info(msg) {
 
 // extensions/openai-sync.ts
 var BRANDING = [
-  `  \u26A1 Pi OpenAI Sync v${EXTENSION_VERSION}`,
-  `  Written by thawee`,
-  `  GitHub: https://github.com/thawee`
+  `  \u26A1 Pi Custom Models Suite v${EXTENSION_VERSION}`,
+  `  OpenAI Compatibility Sync`,
+  `  Written by thawee \u2014 https://github.com/thawee`
 ].join("\n");
 function normalizeUrl(inputUrl) {
   let clean = inputUrl.trim().replace(/\/+$/, "");
@@ -364,12 +364,12 @@ async function performSync(providerName, inputUrl, apiKey) {
 }
 function openai_sync_default(pi) {
   pi.registerCommand("openai-sync", {
-    description: "Sync models from an OpenAI-compatible API (e.g. Ollama, llama.cpp). Use: /openai-sync <url> [apiKey]",
-    detailedHelp: "\n\n\u{1F504} OpenAI Compatibility Synchronization Extension\n\nSynchronizes available models from any OpenAI-compatible API\n(such as Ollama, llama.cpp, Together AI, DeepInfra, etc.)\ninto Pi's models.json configuration file.\n\n\u{1F4CB} Usage:\n  /openai-sync <url> [apiKey] - Sync with URL (provider derived automatically from host/port)\n  /openai-sync --help         - Show this help\n\n\u{1F527} Features:\n\u2022 Reasoning model auto-detection\n\u2022 Model family auto-detection\n\u2022 Atomic configuration updates\n\u2022 Compatible with local instances (Ollama, llama.cpp)\n\u2022 Compatible with cloud providers (Together AI, DeepInfra)\n",
+    description: "Sync available models from an OpenAI-compatible API (e.g. Ollama, llama.cpp, Together AI) into your Pi configuration. Use: /openai-sync <url> [apiKey]",
+    detailedHelp: "\n\n\u{1F504} OpenAI Compatibility Sync (Pi Custom Models Suite)\n\nSynchronizes available models from any OpenAI-compatible API\n(such as Ollama, llama.cpp, Together AI, DeepInfra, etc.)\ninto Pi's models.json configuration file.\n\n\u{1F4CB} Usage:\n  /openai-sync <url> [apiKey] - Sync with URL (provider derived automatically from host/port)\n  /openai-sync --help         - Show this help\n\n\u{1F527} Features:\n\u2022 Reasoning model auto-detection\n\u2022 Model family auto-detection\n\u2022 Atomic configuration updates\n\u2022 Compatible with local instances (Ollama, llama.cpp)\n\u2022 Compatible with cloud providers (Together AI, DeepInfra)\n",
     async handler(args, ctx) {
       if (args.trim() === "--help") {
         ctx.ui.notify(
-          "\u{1F504} OpenAI Compatibility Synchronization Extension\n\n\u{1F4CB} Usage:\n  /openai-sync <url> [apiKey] - Sync with URL (provider derived automatically from host/port)\n  /openai-sync --help         - Show this help\n\n\u{1F527} Compatibility & Features:\n\u2022 Works with Ollama, llama.cpp, and other local/remote OpenAI-compatible APIs\n\u2022 Reasoning model auto-detection\n\u2022 Model family auto-detection\n\u2022 Atomic configuration updates\n",
+          "\u{1F504} OpenAI Compatibility Sync (Pi Custom Models Suite)\n\n\u{1F4CB} Usage:\n  /openai-sync <url> [apiKey] - Sync with URL (provider derived automatically from host/port)\n  /openai-sync --help         - Show this help\n\n\u{1F527} Compatibility & Features:\n\u2022 Works with Ollama, llama.cpp, and other local/remote OpenAI-compatible APIs\n\u2022 Reasoning model auto-detection\n\u2022 Model family auto-detection\n\u2022 Atomic configuration updates\n",
           "info"
         );
         return;
@@ -433,8 +433,8 @@ function openai_sync_default(pi) {
   });
   pi.registerTool({
     name: "openai_sync",
-    label: "OpenAI Sync",
-    description: "Sync available models from an OpenAI-compatible instance into Pi's models.json config file.\n\n" + BRANDING,
+    label: "OpenAI Compatibility Sync",
+    description: "Synchronize available models from an OpenAI-compatible server into Pi's configuration.\n\n" + BRANDING,
     parameters: {
       type: "object",
       properties: {

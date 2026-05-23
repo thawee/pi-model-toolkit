@@ -12,10 +12,10 @@
   "keywords": ["pi-extensions"],
   "license": "MIT",
   "author": "thawee",
-  "homepage": "https://github.com/thawee/pi-openai-sync",
+  "homepage": "https://github.com/thawee/pi-custom-models",
   "repository": {
     "type": "git",
-    "url": "https://github.com/thawee/pi-openai-sync"
+    "url": "https://github.com/thawee/pi-custom-models"
   }
 
 }
