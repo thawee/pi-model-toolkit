@@ -1,6 +1,6 @@
 {
-  "name": "@thawee/pi-custom-models",
-  "version": "1.1.0",
+  "name": "@thawee/pi-model-manager",
+  "version": "1.2.0",
   "description": "Pi Custom Models Suite: Sync models from OpenAI-compatible APIs or manage models on llama.cpp router mode",
   "keywords": [
     "pi-package",
@@ -13,10 +13,10 @@
   ],
   "license": "MIT",
   "author": "thawee",
-  "homepage": "https://github.com/thawee/pi-custom-models",
+  "homepage": "https://github.com/thawee/pi-model-manager",
   "repository": {
     "type": "git",
-    "url": "https://github.com/thawee/pi-custom-models"
+    "url": "https://github.com/thawee/pi-model-manager"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
@@ -25,11 +25,7 @@
     "install:local": "./scripts/install.sh",
     "install:remote": "./scripts/install-remote.sh"
   },
-  "pi": {
-    "extensions": [
-      "./extensions"
-    ]
-  },
+
   "devDependencies": {
     "@types/node": "^25.6.2",
     "esbuild": "^0.28.0",

@@ -3,7 +3,7 @@
  * Eliminates getOllamaBaseUrl() duplication across model-test, ollama-sync, status.
  *
  * @module shared/ollama
- * @writtenby thawee — https://github.com/thawee/pi-custom-models
+ * @writtenby thawee — https://github.com/thawee/pi-model-manager
  */
 import * as fs from "node:fs";
 import * as path from "node:path";
@@ -26,7 +26,7 @@ import type { PiExtensionContext } from "./types";
  *   - scripts/publish-packages.sh (derived from VERSION at runtime)
  *   - package.json (version field)
  */
-export const EXTENSION_VERSION = "1.1.0";
+export const EXTENSION_VERSION = "1.2.0";
 
 /**
  * Path to Pi's models.json configuration file.

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-# bump-version.sh — Bump the version for pi-custom-models.
+# bump-version.sh — Bump the version for pi-model-manager.
 #
 # Updates the version in all relevant files, ensuring consistency.
 # Run this BEFORE building to avoid version skew.
@@ -15,7 +15,7 @@
 #   1. VERSION                                  single source of truth
 #   2. shared/ollama.ts                         EXTENSION_VERSION constant
 #   3. package.json                             root workspace version
-#   4. individual-packages/pi-custom-models/package.json
+#   4. individual-packages/pi-model-manager/package.json
 # ---------------------------------------------------------------------------
 set -euo pipefail
 
@@ -62,7 +62,7 @@ if [ "$CURRENT_VERSION" = "$NEW_VERSION" ]; then
 fi
 
 echo ""
-echo "  ⚡ pi-custom-models — Version Bumper"
+echo "  ⚡ pi-model-manager — Version Bumper"
 echo ""
 info "Current: $CURRENT_VERSION"
 info "New:     $NEW_VERSION"
@@ -84,12 +84,7 @@ log "Updating package.json"
 sed -i '' 's/"version": "[0-9]*\.[0-9]*\.[0-9]*[a-zA-Z0-9.+-]*"/"version": "'"$NEW_VERSION"'"/' \
   "$REPO_ROOT/package.json"
 
-# ── 4. Individual package manifest ───────────────────────────────────────
-PKG_JSON="$REPO_ROOT/individual-packages/pi-custom-models/package.json"
-if [ -f "$PKG_JSON" ]; then
-  log "Updating individual-packages/pi-custom-models/package.json"
-  sed -i '' 's/"version": "[0-9]*\.[0-9]*\.[0-9]*[a-zA-Z0-9.+-]*"/"version": "'"$NEW_VERSION"'"/' "$PKG_JSON"
-fi
+
 
 # ── 5. README.md — version badge ─────────────────────────────────────────
 if [ -f "$REPO_ROOT/README.md" ]; then

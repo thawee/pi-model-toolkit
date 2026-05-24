@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-# install-remote.sh — Install pi-custom-models from GitHub.
+# install-remote.sh — Install pi-model-manager from GitHub.
 #
 # Downloads the compiled extension files directly from the GitHub repository
-# and installs them into ~/.pi/agent/extensions/pi-custom-models.
+# and installs them into ~/.pi/agent/extensions/pi-model-manager.
 #
 # Usage:
 #   ./scripts/install-remote.sh [branch]
@@ -14,9 +14,9 @@
 # ---------------------------------------------------------------------------
 set -euo pipefail
 
-PACKAGE_NAME="pi-custom-models"
+PACKAGE_NAME="pi-model-manager"
 BRANCH="${1:-main}"
-REPO="thawee/pi-custom-models"
+REPO="thawee/pi-model-manager"
 RAW_BASE="https://raw.githubusercontent.com/$REPO/$BRANCH/individual-packages/$PACKAGE_NAME"
 INSTALL_DIR="$HOME/.pi/agent/extensions"
 INSTALL_TARGET="$INSTALL_DIR/$PACKAGE_NAME"

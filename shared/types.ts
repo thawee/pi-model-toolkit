@@ -3,7 +3,7 @@
  * Ported from AgentNova core/types.py.
  *
  * @module shared/types
- * @writtenby thawee — https://github.com/thawee/pi-custom-models
+ * @writtenby thawee — https://github.com/thawee/pi-model-manager
  */
 
 // ============================================================================

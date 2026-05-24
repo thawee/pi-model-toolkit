@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-# build.sh — Build the pi-custom-models extension.
+# build.sh — Build the pi-model-manager extension.
 #
 # Compiles TypeScript → bundled JavaScript and packs it into a .tgz tarball.
 # ---------------------------------------------------------------------------
@@ -10,8 +10,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 BUILD_DIR="$REPO_ROOT/dist"
-PKG_DIR="$REPO_ROOT/individual-packages/pi-custom-models"
-EXT_SRC="$REPO_ROOT/extensions/openai-sync.ts"
+EXT_SRC="$REPO_ROOT/extensions/index.ts"
 
 # ── Version ──────────────────────────────────────────────────────────────
 if [ ! -f "$REPO_ROOT/VERSION" ]; then
@@ -58,11 +57,11 @@ rm -rf "$BUILD_DIR"
 mkdir -p "$BUILD_DIR"
 
 # ── Bundle ───────────────────────────────────────────────────────────────
-log "Building @thawee/pi-custom-models v${VERSION}"
+log "Building @thawee/pi-model-manager v${VERSION}"
 TARGET_DIR="$BUILD_DIR/package"
 mkdir -p "$TARGET_DIR"
 
-# Build openai-sync
+# Build index
 $ESBUILD "$EXT_SRC" \
   --bundle \
   --format=esm \
@@ -74,48 +73,35 @@ $ESBUILD "$EXT_SRC" \
   --external:path \
   --external:fs \
   --external:os \
-  --outfile="$TARGET_DIR/openai-sync.js"
+  --outfile="$TARGET_DIR/index.js"
 
-cp "$TARGET_DIR/openai-sync.js" "$PKG_DIR/openai-sync.js"
-js_size_server="$(wc -c < "$TARGET_DIR/openai-sync.js")"
-info "  openai-sync.ts -> openai-sync.js  ($(numfmt --to=iec "$js_size_server" 2>/dev/null || echo "${js_size_server}B"))"
-
-# Build llama-model
-$ESBUILD "$REPO_ROOT/extensions/llama-model.ts" \
-  --bundle \
-  --format=esm \
-  --target=es2020 \
-  --platform=node \
-  --external:@mariozechner/* \
-  --external:@earendil-works/* \
-  --external:typebox \
-  --external:path \
-  --external:fs \
-  --external:os \
-  --outfile="$TARGET_DIR/llama-model.js"
-
-cp "$TARGET_DIR/llama-model.js" "$PKG_DIR/llama-model.js"
-js_size_llama="$(wc -c < "$TARGET_DIR/llama-model.js")"
-info "  llama-model.ts -> llama-model.js  ($(numfmt --to=iec "$js_size_llama" 2>/dev/null || echo "${js_size_llama}B"))"
+js_size="$(wc -c < "$TARGET_DIR/index.js")"
+info "  index.ts -> index.js  ($(numfmt --to=iec "$js_size" 2>/dev/null || echo "${js_size}B"))"
 
 
 # ── Package JSON ─────────────────────────────────────────────────────────
-# Read source package.json, update version, and write to bundle target
+# Read root package.json, clean it up for distribution
 node -e '
 const fs = require("fs");
-const pkg = JSON.parse(fs.readFileSync("'"$PKG_DIR"'/package.json", "utf8"));
+const pkg = JSON.parse(fs.readFileSync("'"$REPO_ROOT"'/package.json", "utf8"));
 pkg.version = "'"$VERSION"'";
+delete pkg.scripts;
+delete pkg.devDependencies;
+pkg.main = "index.js";
+pkg.type = "module";
+pkg.pi = { extensions: ["./index.js"] };
+pkg.peerDependencies = { "@earendil-works/pi-coding-agent": ">=0.66" };
 fs.writeFileSync("'"$TARGET_DIR"'/package.json", JSON.stringify(pkg, null, 2) + "\n");
 '
 
 # ── README ───────────────────────────────────────────────────────────────
-[ -f "$PKG_DIR/README.md" ] && cp "$PKG_DIR/README.md" "$TARGET_DIR/README.md"
+[ -f "$REPO_ROOT/README.md" ] && cp "$REPO_ROOT/README.md" "$TARGET_DIR/README.md"
 
 # ── Tarball ──────────────────────────────────────────────────────────────
-TFILE="pi-custom-models-${VERSION}.tgz"
+TFILE="pi-model-manager-${VERSION}.tgz"
 (cd "$TARGET_DIR" && tar -czf "$BUILD_DIR/$TFILE" *)
 
-log "ok @thawee/pi-custom-models v${VERSION} -> $BUILD_DIR/$TFILE"
+log "ok @thawee/pi-model-manager v${VERSION} -> $BUILD_DIR/$TFILE"
 echo ""
 log "Build complete!"
 echo ""

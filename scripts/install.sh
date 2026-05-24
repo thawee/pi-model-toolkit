@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-# install.sh — Install the pi-custom-models extension locally.
+# install.sh — Install the pi-model-manager extension locally.
 #
-# Copies the compiled extension from individual-packages/pi-custom-models
-# into ~/.pi/agent/extensions/pi-custom-models.
+# Copies the compiled extension from individual-packages/pi-model-manager
+# into ~/.pi/agent/extensions/pi-model-manager.
 #
 # Usage:
 #   ./scripts/install.sh
@@ -13,8 +13,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-PACKAGE_NAME="pi-custom-models"
-PKG_SRC="$REPO_ROOT/individual-packages/$PACKAGE_NAME"
+PACKAGE_NAME="pi-model-manager"
+PKG_SRC="$REPO_ROOT/dist/package"
 INSTALL_DIR="$HOME/.pi/agent/extensions"
 INSTALL_TARGET="$INSTALL_DIR/$PACKAGE_NAME"
 
@@ -38,8 +38,8 @@ if [ ! -d "$PKG_SRC" ]; then
   exit 1
 fi
 
-if [ ! -f "$PKG_SRC/openai-sync.js" ]; then
-  err "Compiled bundle not found: $PKG_SRC/openai-sync.js"
+if [ ! -f "$PKG_SRC/index.js" ]; then
+  err "Compiled bundle not found: $PKG_SRC/index.js"
   err "Run ./scripts/build.sh first to compile the extension."
   exit 1
 fi
