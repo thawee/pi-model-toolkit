@@ -1,7 +1,7 @@
-# ⚡ pi-model-manager
+# ⚡ pi-model-toolkit
 Integrate any local or remote model seamlessly.
 
-`pi-model-manager` is an advanced model orchestration suite for Pi Agent that brings autonomous synchronization and robust router management to your AI environment.
+`pi-model-toolkit` is an advanced model orchestration suite for Pi Agent that brings autonomous synchronization and robust router management to your AI environment.
 
 Instead of manually editing configuration files and hunting down context window parameters, this suite provides two distinct, highly optimized tools designed for frictionless model management:
 
@@ -62,7 +62,7 @@ This suite shifts the burden of maintaining model compatibility away from tediou
 ### 1. Project Structure
 
 ```
-pi-model-manager/
+pi-model-toolkit/
 ├── README.md           # Documentation
 ├── package.json        # Dependencies & package metadata
 ├── scripts/            # Compilation and build scripts
@@ -76,7 +76,7 @@ pi-model-manager/
 You can install the suite directly from GitHub using the Pi Agent CLI:
 
 ```bash
-pi install git:github.com/thawee/pi-model-manager
+pi install git:github.com/thawee/pi-model-toolkit
 ```
 
 Pi will clone the repository, automatically discover the bundled `.js` extensions, and register them globally. Reload Pi to activate.

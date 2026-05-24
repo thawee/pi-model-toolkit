@@ -3,7 +3,7 @@
  * Eliminates getOllamaBaseUrl() duplication across model-test, ollama-sync, status.
  *
  * @module shared/ollama
- * @writtenby thawee — https://github.com/thawee/pi-model-manager
+ * @writtenby thawee — https://github.com/thawee/pi-model-toolkit
  */
 import * as fs from "node:fs";
 import * as path from "node:path";

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-# install.sh — Install the pi-model-manager extension locally.
+# install.sh — Install the pi-model-toolkit extension locally.
 #
-# Copies the compiled extension from individual-packages/pi-model-manager
-# into ~/.pi/agent/extensions/pi-model-manager.
+# Copies the compiled extension from individual-packages/pi-model-toolkit
+# into ~/.pi/agent/extensions/pi-model-toolkit.
 #
 # Usage:
 #   ./scripts/install.sh
@@ -13,7 +13,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-PACKAGE_NAME="pi-model-manager"
+PACKAGE_NAME="pi-model-toolkit"
 PKG_SRC="$REPO_ROOT/dist/package"
 INSTALL_DIR="$HOME/.pi/agent/extensions"
 INSTALL_TARGET="$INSTALL_DIR/$PACKAGE_NAME"
