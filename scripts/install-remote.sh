@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-# install-remote.sh — Install pi-model-toolkit from GitHub.
+# install-remote.sh — Install llama-toolkit from GitHub.
 #
 # Downloads the compiled extension files directly from the GitHub repository
-# and installs them into ~/.pi/agent/extensions/pi-model-toolkit.
+# and installs them into ~/.pi/agent/extensions/llama-toolkit.
 #
 # Usage:
 #   ./scripts/install-remote.sh [branch]
@@ -14,9 +14,9 @@
 # ---------------------------------------------------------------------------
 set -euo pipefail
 
-PACKAGE_NAME="pi-model-toolkit"
+PACKAGE_NAME="llama-toolkit"
 BRANCH="${1:-main}"
-REPO="thawee/pi-model-toolkit"
+REPO="thawee/llama-toolkit"
 RAW_BASE="https://raw.githubusercontent.com/$REPO/$BRANCH/individual-packages/$PACKAGE_NAME"
 INSTALL_DIR="$HOME/.pi/agent/extensions"
 INSTALL_TARGET="$INSTALL_DIR/$PACKAGE_NAME"

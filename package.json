@@ -1,7 +1,7 @@
 {
-  "name": "@thawee/pi-model-toolkit",
+  "name": "@thawee/llama-toolkit",
   "version": "1.2.0",
-  "description": "Pi Custom Models Suite: Sync models from OpenAI-compatible APIs or manage models on llama.cpp router mode",
+  "description": "Llama Toolkit: Manage models on llama.cpp router mode",
   "keywords": [
     "pi-package",
     "pi",
@@ -13,10 +13,10 @@
   ],
   "license": "MIT",
   "author": "thawee",
-  "homepage": "https://github.com/thawee/pi-model-toolkit",
+  "homepage": "https://github.com/thawee/llama-toolkit",
   "repository": {
     "type": "git",
-    "url": "https://github.com/thawee/pi-model-toolkit"
+    "url": "https://github.com/thawee/llama-toolkit"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

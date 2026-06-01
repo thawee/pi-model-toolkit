@@ -3,10 +3,10 @@ import assert from "node:assert/strict";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import * as os from "node:os";
-import { resolveUrl } from "../extensions/llama-model";
-import registerExtension from "../extensions/llama-model";
+import { resolveUrl } from "../extensions/llama-server";
+import registerExtension from "../extensions/llama-server";
 
-describe("llama-model resolveUrl resolution hierarchy", () => {
+describe("llama-server resolveUrl resolution hierarchy", () => {
   const tempDir = path.join(os.tmpdir(), `pi-llama-test-${Date.now()}`);
 
   before(() => {
@@ -45,7 +45,7 @@ describe("llama-model resolveUrl resolution hierarchy", () => {
   });
 });
 
-describe("llama-model Extension Registration", () => {
+describe("llama-server Extension Registration", () => {
   it("registers offline fallback models command if server is offline during start", async () => {
     const registeredCommands: string[] = [];
     let registeredProvider = false;
@@ -65,7 +65,7 @@ describe("llama-model Extension Registration", () => {
     process.env.LLAMA_SERVER_URL = "http://127.0.0.1:65530";
     await registerExtension(mockPi);
 
-    assert.deepEqual(registeredCommands, ["llama-model"]);
+    assert.deepEqual(registeredCommands, ["llama-server"]);
     assert.equal(registeredProvider, false);
   });
 });

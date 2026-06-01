@@ -15,7 +15,7 @@ import { EXTENSION_VERSION } from "../shared/ollama";
 
 // ── Branding ──────────────────────────────────────────────────────────────
 const BRANDING = [
-  `  ⚡ Pi Custom Models Suite v${EXTENSION_VERSION}`,
+  `  ⚡ Llama Toolkit v${EXTENSION_VERSION}`,
   `  llama.cpp Router Management`,
   `  Written by thawee — https://github.com/thawee`,
 ].join("\n");
@@ -89,7 +89,7 @@ export default async function (pi: ExtensionAPI) {
     serverModels = await listModels(url);
   } catch (e) {
     // Gracefully handle unreachable server on startup
-    pi.registerCommand("llama-model", {
+    pi.registerCommand("llama-server", {
       description: "Manage, load, and switch models on a live llama.cpp server running in router mode (offline)",
       handler: async (_args: string, ctx: any) => {
         ctx.ui.notify(
@@ -136,8 +136,8 @@ export default async function (pi: ExtensionAPI) {
     }
   });
 
-  // ---- /llama-model — live browser ----
-  pi.registerCommand("llama-model", {
+  // ---- /llama-server — live browser ----
+  pi.registerCommand("llama-server", {
     description: "Manage, load, and switch models on a live llama.cpp server running in router mode",
     handler: async (_args: string, ctx: any) => {
       const base = resolveUrl(ctx.cwd);
@@ -199,7 +199,7 @@ export default async function (pi: ExtensionAPI) {
       const action = await ctx.ui.select(`${model.id}`, actions);
       if (!action || action === "Cancel") return;
 
-      ctx.ui.setStatus("llama-model", `${action === "Unload" ? "Unloading" : "Loading"} ${model.id}...`);
+      ctx.ui.setStatus("llama-server", `${action === "Unload" ? "Unloading" : "Loading"} ${model.id}...`);
 
       try {
         if (action === "Unload") {
@@ -226,7 +226,7 @@ export default async function (pi: ExtensionAPI) {
       } catch (e: any) {
         ctx.ui.notify(`Action failed: ${e.message}`, "error");
       } finally {
-        ctx.ui.setStatus("llama-model", undefined);
+        ctx.ui.setStatus("llama-server", undefined);
       }
     },
   });

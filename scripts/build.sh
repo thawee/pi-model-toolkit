@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-# build.sh — Build the pi-model-toolkit extension.
+# build.sh — Build the llama-toolkit extension.
 #
 # Compiles TypeScript → bundled JavaScript and packs it into a .tgz tarball.
 # ---------------------------------------------------------------------------
@@ -57,7 +57,7 @@ rm -rf "$BUILD_DIR"
 mkdir -p "$BUILD_DIR"
 
 # ── Bundle ───────────────────────────────────────────────────────────────
-log "Building @thawee/pi-model-toolkit v${VERSION}"
+log "Building @thawee/llama-toolkit v${VERSION}"
 TARGET_DIR="$BUILD_DIR/package"
 mkdir -p "$TARGET_DIR"
 
@@ -98,10 +98,10 @@ fs.writeFileSync("'"$TARGET_DIR"'/package.json", JSON.stringify(pkg, null, 2) + 
 [ -f "$REPO_ROOT/README.md" ] && cp "$REPO_ROOT/README.md" "$TARGET_DIR/README.md"
 
 # ── Tarball ──────────────────────────────────────────────────────────────
-TFILE="pi-model-toolkit-${VERSION}.tgz"
+TFILE="llama-toolkit-${VERSION}.tgz"
 (cd "$TARGET_DIR" && tar -czf "$BUILD_DIR/$TFILE" *)
 
-log "ok @thawee/pi-model-toolkit v${VERSION} -> $BUILD_DIR/$TFILE"
+log "ok @thawee/llama-toolkit v${VERSION} -> $BUILD_DIR/$TFILE"
 echo ""
 log "Build complete!"
 echo ""
