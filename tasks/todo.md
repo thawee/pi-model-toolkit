@@ -1,15 +1,13 @@
-# Implementation Plan — Rename Git Repository to pi-openai-toolkit
+# Implementation Plan — Bump Version to 1.3.0
 
 ## Goal
-Update all git repository references, URLs, and install scripts in the codebase from `openai-toolkit` (or `llama-toolkit`) to the new git name `pi-openai-toolkit`.
+Bump the project version to `1.3.0` using the version bumper script, compile the final package, run tests, and commit the version changes.
 
 ## Tasks
-- [x] Update repository and homepage fields in [package.json](file:///Users/thawee.p/Workspaces/github/pi-model-toolkit/package.json).
-- [x] Update `REPO` variable in [scripts/install-remote.sh](file:///Users/thawee.p/Workspaces/github/pi-model-toolkit/scripts/install-remote.sh).
-- [x] Update git clone and installation command examples in [README.md](file:///Users/thawee.p/Workspaces/github/pi-model-toolkit/README.md).
-- [x] Update docstring headers in [shared/format.ts](file:///Users/thawee.p/Workspaces/github/pi-model-toolkit/shared/format.ts), [shared/ollama.ts](file:///Users/thawee.p/Workspaces/github/pi-model-toolkit/shared/ollama.ts), and [shared/types.ts](file:///Users/thawee.p/Workspaces/github/pi-model-toolkit/shared/types.ts).
-- [x] Verify formatting and run the test suite to ensure correctness.
-- [x] Document final results in this todo file.
+- [ ] Run `./scripts/bump-version.sh 1.3.0` to update the version across all configuration files and code files.
+- [ ] Compile the project via `npm run build` and run the test suite to ensure no regressions occur.
+- [ ] Commit the version change changes to the repository.
+- [ ] Document final results in this todo file.
 
 ## Results & Review
 1. **package.json:** Updated homepage and repository fields to `https://github.com/thawee/pi-openai-toolkit` (replacing the old `llama-toolkit` references).
