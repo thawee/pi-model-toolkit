@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-# bump-version.sh — Bump the version for llama-toolkit.
+# bump-version.sh — Bump the version for openai-toolkit.
 #
 # Updates the version in all relevant files, ensuring consistency.
 # Run this BEFORE building to avoid version skew.
@@ -15,7 +15,7 @@
 #   1. VERSION                                  single source of truth
 #   2. shared/ollama.ts                         EXTENSION_VERSION constant
 #   3. package.json                             root workspace version
-#   4. individual-packages/llama-toolkit/package.json
+#   4. individual-packages/openai-toolkit/package.json
 # ---------------------------------------------------------------------------
 set -euo pipefail
 
@@ -62,7 +62,7 @@ if [ "$CURRENT_VERSION" = "$NEW_VERSION" ]; then
 fi
 
 echo ""
-echo "  ⚡ llama-toolkit — Version Bumper"
+echo "  ⚡ openai-toolkit — Version Bumper"
 echo ""
 info "Current: $CURRENT_VERSION"
 info "New:     $NEW_VERSION"

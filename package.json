@@ -1,7 +1,7 @@
 {
-  "name": "@thawee/llama-toolkit",
+  "name": "@thawee/openai-toolkit",
   "version": "1.2.0",
-  "description": "Llama Toolkit: Manage models on llama.cpp router mode",
+  "description": "OpenAI Toolkit: Manage models on OpenAI-compatible servers",
   "keywords": [
     "pi-package",
     "pi",
@@ -9,14 +9,14 @@
     "pi-extensions",
     "openai",
     "custom-models",
-    "llama"
+    "openai-compat"
   ],
   "license": "MIT",
   "author": "thawee",
-  "homepage": "https://github.com/thawee/llama-toolkit",
+  "homepage": "https://github.com/thawee/pi-openai-toolkit",
   "repository": {
     "type": "git",
-    "url": "https://github.com/thawee/llama-toolkit"
+    "url": "https://github.com/thawee/pi-openai-toolkit"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

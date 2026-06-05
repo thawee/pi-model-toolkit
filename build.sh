@@ -1,15 +1,42 @@
-#!/bin/bash
-# ⚡ build.sh — Compiles TypeScript extensions to JavaScript
+#!/usr/bin/env bash
+# ⚡ build.sh — Setup, build, and install pi-focus extensions
 
-set -e
+set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo -e "\n\x1b[32m⚡ Building pi-focus extensions...\x1b[0m"
+# ── Colors ───────────────────────────────────────────────────────────────
+if [ -t 1 ]; then
+  GREEN='\033[0;32m'; CYAN='\033[0;36m'; NC='\033[0m'
+else
+  GREEN=''; CYAN=''; NC=''
+fi
 
-# 1. Compile TypeScript extensions
-echo -e "\n\x1b[34m[1/1] Compiling TypeScript extensions to JavaScript...\x1b[0m"
+log()  { printf "\n${GREEN}%s${NC}\n" "$*"; }
+info() { printf "\n${CYAN}%s${NC}\n" "$*"; }
+
+log "⚡ Setting up, building, and installing pi-focus extensions..."
+
+# 1. Setup (Install dependencies)
+if [ ! -d "$PROJECT_DIR/node_modules" ]; then
+  info "[1/4] Installing dependencies..."
+  cd "$PROJECT_DIR"
+  npm install
+else
+  info "[1/4] Dependencies already installed, skipping setup..."
+fi
+
+# 2. Type Check
+info "[2/4] Type checking..."
 cd "$PROJECT_DIR"
 npx tsc
 
-echo -e "\n\x1b[32m✔ Build complete!\x1b[0m"
+# 3. Build (Bundle)
+info "[3/4] Bundling extension..."
+./scripts/build.sh
+
+# 4. Install
+info "[4/4] Installing to ~/.pi/agent/extensions..."
+./scripts/install.sh
+
+log "✔ All done!"

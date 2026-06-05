@@ -345,3 +345,27 @@ test("readModifyWriteModelsJson aborts when modifier returns null", async () => 
     writeModelsJson(originalData);
   }
 });
+
+test("readModifyWriteModelsJson supports async modifiers", async () => {
+  const { readModifyWriteModelsJson, readModelsJson, writeModelsJson } = await import("../shared/ollama");
+
+  const originalData = readModelsJson();
+
+  try {
+    writeModelsJson({ providers: { test: { models: [] } } });
+
+    const result = await readModifyWriteModelsJson(async (data) => {
+      // Simulate async work
+      await new Promise((resolve) => setTimeout(resolve, 10));
+      data.providers["test"].models.push({ id: "async-model" } as any);
+      return data;
+    });
+
+    assert.equal(result, true);
+
+    const updated = readModelsJson();
+    assert.equal(updated.providers["test"].models[0].id, "async-model");
+  } finally {
+    writeModelsJson(originalData);
+  }
+});

@@ -3,7 +3,7 @@
  * Eliminates getOllamaBaseUrl() duplication across model-test, ollama-sync, status.
  *
  * @module shared/ollama
- * @writtenby thawee — https://github.com/thawee/llama-toolkit
+ * @writtenby thawee — https://github.com/thawee/pi-openai-toolkit
  */
 import * as fs from "node:fs";
 import * as path from "node:path";
@@ -306,19 +306,19 @@ export async function acquireModelsJsonLock(): Promise<{ release: () => void }> 
 }
 
 /**
- * Safely read, modify, and write models.json under a lock.
+ * Safe read-modify-write wrapper for models.json with file locking.
  * Prevents concurrent read-modify-write cycles between extensions.
  *
  * @param modifier - Function that receives the current data and returns modified data (or null to abort)
  * @returns true if the write succeeded, false if aborted
  */
 export async function readModifyWriteModelsJson(
-  modifier: (data: PiModelsJson) => PiModelsJson | null
+  modifier: (data: PiModelsJson) => PiModelsJson | null | Promise<PiModelsJson | null>
 ): Promise<boolean> {
   const { release } = await acquireModelsJsonLock();
   try {
     const data = readModelsJson();
-    const modified = modifier(data);
+    const modified = await modifier(data);
     if (modified === null) return false;
     writeModelsJson(modified);
     return true;
@@ -434,6 +434,31 @@ export async function withRetry<T>(
     }
   }
   throw lastError;
+}
+
+/**
+ * Fetch the list of available models from an OpenAI-compatible instance.
+ *
+ * Queries the `/v1/models` endpoint to get all available models.
+ *
+ * @param baseUrl - The provider's base URL (e.g., "http://localhost:8080/v1")
+ * @param apiKey - Optional API key
+ * @returns Array of model identifiers
+ * @throws Error if the request fails
+ */
+export async function fetchOpenAIModels(baseUrl: string, apiKey?: string): Promise<string[]> {
+  return withRetry(async () => {
+    const res = await fetch(`${baseUrl}/models`.replace(/\/+models$/, "/models"), {
+      headers: apiKey ? { "Authorization": `Bearer ${apiKey}` } : undefined,
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!res.ok) throw new Error(`OpenAI provider at ${baseUrl} returned ${res.status}`);
+    const data = (await res.json()) as { data?: Array<{ id: string }> };
+    return (data.data ?? [])
+      .map((m) => m.id)
+      .filter((id) => id && id !== "default" && id !== "main" && id !== "llama-server");
+    });
+
 }
 
 /**

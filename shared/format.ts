@@ -3,7 +3,7 @@
  * Extracted from diag.ts and model-test.ts to eliminate duplication.
  *
  * @module shared/format
- * @writtenby thawee — https://github.com/thawee/llama-toolkit
+ * @writtenby thawee — https://github.com/thawee/pi-openai-toolkit
  */
 
 // ============================================================================

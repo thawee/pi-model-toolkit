@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-# install-remote.sh — Install llama-toolkit from GitHub.
+# install-remote.sh — Install openai-toolkit from GitHub.
 #
 # Downloads the compiled extension files directly from the GitHub repository
-# and installs them into ~/.pi/agent/extensions/llama-toolkit.
+# and installs them into ~/.pi/agent/extensions/openai-toolkit.
 #
 # Usage:
 #   ./scripts/install-remote.sh [branch]
@@ -14,9 +14,9 @@
 # ---------------------------------------------------------------------------
 set -euo pipefail
 
-PACKAGE_NAME="llama-toolkit"
+PACKAGE_NAME="openai-toolkit"
 BRANCH="${1:-main}"
-REPO="thawee/llama-toolkit"
+REPO="thawee/pi-openai-toolkit"
 RAW_BASE="https://raw.githubusercontent.com/$REPO/$BRANCH/individual-packages/$PACKAGE_NAME"
 INSTALL_DIR="$HOME/.pi/agent/extensions"
 INSTALL_TARGET="$INSTALL_DIR/$PACKAGE_NAME"
@@ -49,7 +49,7 @@ fi
 log "Downloading $PACKAGE_NAME from $REPO ($BRANCH)..."
 
 # Files to download
-FILES=("package.json" "openai-sync.js" "llama-model.js" "README.md")
+FILES=("package.json" "index.js" "README.md")
 
 for file in "${FILES[@]}"; do
   url="$RAW_BASE/$file"
@@ -74,8 +74,7 @@ fi
 
 mkdir -p "$INSTALL_TARGET"
 cp "$TEMP_DIR"/package.json "$INSTALL_TARGET/"
-cp "$TEMP_DIR"/openai-sync.js "$INSTALL_TARGET/"
-[ -f "$TEMP_DIR/llama-model.js" ] && cp "$TEMP_DIR/llama-model.js" "$INSTALL_TARGET/"
+cp "$TEMP_DIR"/index.js "$INSTALL_TARGET/"
 [ -f "$TEMP_DIR/README.md" ] && cp "$TEMP_DIR/README.md" "$INSTALL_TARGET/"
 
 # Clean up npm-specific fields from package.json that Pi doesn't need
@@ -88,7 +87,6 @@ log "   Location: $INSTALL_TARGET"
 echo ""
 log "Restart Pi to load the extension."
 echo ""
-info "To verify:    /openai-sync --help"
-info "To verify:    /llama-model"
+info "To verify:    /llama-swap"
 info "To uninstall: rm -rf $INSTALL_TARGET"
 echo ""

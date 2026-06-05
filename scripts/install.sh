@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-# install.sh — Install the llama-toolkit extension locally.
+# install.sh — Install the openai-toolkit extension locally.
 #
-# Copies the compiled extension from individual-packages/llama-toolkit
-# into ~/.pi/agent/extensions/llama-toolkit.
+# Copies the compiled extension from individual-packages/openai-toolkit
+# into ~/.pi/agent/extensions/openai-toolkit.
 #
 # Usage:
 #   ./scripts/install.sh
@@ -13,7 +13,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-PACKAGE_NAME="llama-toolkit"
+PACKAGE_NAME="openai-toolkit"
 PKG_SRC="$REPO_ROOT/dist/package"
 INSTALL_DIR="$HOME/.pi/agent/extensions"
 INSTALL_TARGET="$INSTALL_DIR/$PACKAGE_NAME"
@@ -67,7 +67,6 @@ log "   Location: $INSTALL_TARGET"
 echo ""
 log "Restart Pi to load the extension."
 echo ""
-info "To verify:    /openai-sync --help"
-info "To verify:    /llama-model"
+info "To verify:    /llama-swap"
 info "To uninstall: rm -rf $INSTALL_TARGET"
 echo ""

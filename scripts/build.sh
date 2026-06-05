@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-# build.sh — Build the llama-toolkit extension.
+# build.sh — Build the openai-toolkit extension.
 #
 # Compiles TypeScript → bundled JavaScript and packs it into a .tgz tarball.
 # ---------------------------------------------------------------------------
@@ -57,7 +57,7 @@ rm -rf "$BUILD_DIR"
 mkdir -p "$BUILD_DIR"
 
 # ── Bundle ───────────────────────────────────────────────────────────────
-log "Building @thawee/llama-toolkit v${VERSION}"
+log "Building @thawee/openai-toolkit v${VERSION}"
 TARGET_DIR="$BUILD_DIR/package"
 mkdir -p "$TARGET_DIR"
 
@@ -70,6 +70,9 @@ $ESBUILD "$EXT_SRC" \
   --external:@mariozechner/* \
   --external:@earendil-works/* \
   --external:typebox \
+  --external:node:path \
+  --external:node:fs \
+  --external:node:os \
   --external:path \
   --external:fs \
   --external:os \
@@ -98,10 +101,10 @@ fs.writeFileSync("'"$TARGET_DIR"'/package.json", JSON.stringify(pkg, null, 2) + 
 [ -f "$REPO_ROOT/README.md" ] && cp "$REPO_ROOT/README.md" "$TARGET_DIR/README.md"
 
 # ── Tarball ──────────────────────────────────────────────────────────────
-TFILE="llama-toolkit-${VERSION}.tgz"
+TFILE="openai-toolkit-${VERSION}.tgz"
 (cd "$TARGET_DIR" && tar -czf "$BUILD_DIR/$TFILE" *)
 
-log "ok @thawee/llama-toolkit v${VERSION} -> $BUILD_DIR/$TFILE"
+log "ok @thawee/openai-toolkit v${VERSION} -> $BUILD_DIR/$TFILE"
 echo ""
 log "Build complete!"
 echo ""

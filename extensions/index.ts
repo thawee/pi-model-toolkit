@@ -1,9 +1,11 @@
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
-import llamaServerExtension from "./llama-server";
+import openaiCompatSync from "./openai-sync";
 
 /**
- * Entry point for the Llama Toolkit.
+ * Entry point for the OpenAI Toolkit.
  */
 export default async function (pi: ExtensionAPI) {
-  await llamaServerExtension(pi);
+  console.log("⚡ OpenAI Toolkit loading...");
+  await openaiCompatSync(pi);
+  console.log("✅ OpenAI Toolkit ready");
 }
